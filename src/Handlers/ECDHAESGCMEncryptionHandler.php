@@ -101,7 +101,7 @@ final class ECDHAESGCMEncryptionHandler implements EncryptionHandlerInterface
                 throw new RuntimeException('Failed to load ephemeral public key');
             }
 
-            $sharedKey = openssl_pkey_derive($privateKey, $ephemeralPublicKey);
+            $sharedKey = openssl_pkey_derive($ephemeralPublicKey, $privateKey);
             if ($sharedKey === false) {
                 throw new RuntimeException('ECDH key agreement failed');
             }
