@@ -36,7 +36,7 @@ final class ECDHAESGCMEncryptionHandler implements EncryptionHandlerInterface
         }
 
         // Derive shared secret via ECDH
-        $sharedKey = openssl_pkey_derive($ephemeralPrivate, $publicKey);
+        $sharedKey = openssl_pkey_derive($publicKey, $ephemeralPrivate);
         if ($sharedKey === false) {
             throw new RuntimeException('ECDH key agreement failed');
         }
