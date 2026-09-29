@@ -36,7 +36,7 @@ final class ECIESEncryptionHandler implements EncryptionHandlerInterface
         }
 
         // Derive shared secret via ECDH
-        $sharedKey = openssl_pkey_derive($ephemeralPrivate, $publicKey);
+        $sharedKey = openssl_pkey_derive($publicKey, $ephemeralPrivate);
         if ($sharedKey === false) {
             throw new RuntimeException('ECDH key agreement failed');
         }
@@ -90,7 +90,7 @@ final class ECIESEncryptionHandler implements EncryptionHandlerInterface
                 throw new RuntimeException('Failed to load ephemeral public key');
             }
 
-            $sharedKey = openssl_pkey_derive($privateKey, $ephemeralPublicKey);
+            $sharedKey = openssl_pkey_derive($ephemeralPublicKey, $privateKey);
             if ($sharedKey === false) {
                 throw new RuntimeException('ECDH key agreement failed');
             }
